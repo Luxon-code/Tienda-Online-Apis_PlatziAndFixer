@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/index.js"></script>
+    <link rel="shortcut icon" href="/iconos/favicon.ico">
+    <title>Tienda Online</title>
+</head>
+<body onload="categorias(),getDetalleProducto(),searchProducto(),getRecomendados(),listarCarrito()">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="inicio.html">
+        <img src="https://cdn-icons-png.flaticon.com/512/8539/8539252.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="inicio.html">Inicio</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tipo de moneda
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('USD')">USD</a></li>
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('COP')">COP</a></li>
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('EUR')">EUR</a></li>
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('JPY')">JPY</a></li>
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('GBP')">GBP</a></li>
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('AUD')">AUD</a></li>
+            <li><a href="#" class="dropdown-item" onclick="cambiarMoneda('CAD')">CAD</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="search" aria-label="search" id="txtBuscar" onkeyup="autoCompletProductos()">
+        <div id="listBusqueda"></div>
+        <button class="btn btn-outline-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"><i class="fas fa-solid fa-cart-arrow-down"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+  <!-- Contenido principal -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <h4 class="text-center">Categorías</h4>
+        <ul class="list-group" id="list-categorias">
+
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+            <h2 class="text-center">Detalle del producto</h2>
+        </div>
+        <div class="row d-flex justify-content-around" id="DetalleProducto">
+            
+        </div>
+        <div class="row">
+            <h2 class="text-center">Productos Recomendados</h2>
+        </div>
+        <div class="row d-flex justify-content-around" id="Categorias" style="height:500px; overflow:auto;">
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-info text-dark">
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Nosotros</h5>
+          <p>Somos una tienda en línea que se especializa en productos de calidad.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Enlaces útiles</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contacto</h5>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-geo-alt"></i> 123 Calle Principal, Neiva, Colombia</li>
+            <li><i class="bi bi-phone"></i> +1234567890</li>
+            <li><i class="bi bi-envelope"></i> info@tiendaOnline.com</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="text-center">© 2023 Todos los derechos reservados | ADSO 2449133 | Tienda online</p>
+    </div>
+  </footer>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <div class="d-flex flex-column">
+        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+        <h6 id="total"></h6>
+      </div>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" id="list-carrito">
+
+    </div>
+    <button class="btn btn-outline-info" onclick="finalizarCompra()">Finalizar Compra</button>
+  </div>   
+</body>
+</html>
